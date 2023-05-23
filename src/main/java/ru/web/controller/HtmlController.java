@@ -1,0 +1,80 @@
+package ru.web.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ru.web.model.Product;
+import ru.web.model.User;
+import ru.web.repository.ProductRepo;
+import ru.web.repository.UserRepo;
+
+import javax.persistence.criteria.CriteriaBuilder;
+
+
+@Controller
+public class HtmlController {
+
+    private ProductRepo productRepo;
+    private UserRepo userRepo;
+    @Autowired
+    public HtmlController(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public String init(Model model) {
+        List<Product> productList = productRepo.getAllProducts();
+        model.addAttribute("productsList", productList);
+        return "index";
+    }
+
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    public String addProduct(Model model, Product product) {
+        productRepo.saveProduct(product);
+        List<Product> productsList = productRepo.getAllProducts();
+        model.addAttribute("productsList", productsList);
+        return "index";
+    }
+
+    @RequestMapping(value = "/products/edit/{id}", method = RequestMethod.GET)
+    public String editProduct(Model model, @PathVariable("id") Integer id) {
+        Product product = productRepo.getProductById(id);
+        model.addAttribute("product", product);
+        return "edit";
+    }
+
+    @RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET)
+    public String deleteProduct(Model model, @PathVariable("id") Integer id) {
+        Product product = productRepo.deleteProductById(id);
+        List<Product> productsList = productRepo.getAllProducts();
+        model.addAttribute("productsList", productsList);
+        return "edit";
+    }
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(Model model, User user) {
+        return "index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
+        return "login";
+    }
+
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    public String signIn(Model model, User user) {
+        userRepo.saveUser(user);
+        return "login";
+    }
+
+    @RequestMapping(value = "/signin", method = RequestMethod.GET)
+    public String signIn(Model model) {
+        return "signin";
+    }
+}
