@@ -20,8 +20,9 @@
         <legend>Создать нового пользователя</legend>
         <form name="user" action="/signin" method="post">
             Логин : <input type="text" name="name" /><br/>
+            Email : <input type="text" name="email" /><br/>
             Пароль: <input type="text" name="password" /><br/>
-            <input type="submit" value="Созвать" />
+            <input type="submit" value="Создать" />
         </form>
         <br>
         <a href="/login">

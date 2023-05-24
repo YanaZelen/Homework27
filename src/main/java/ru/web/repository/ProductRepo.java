@@ -35,9 +35,8 @@ public class ProductRepo {
     }
 
     @Transactional
-    public Product deleteProductById(Integer id) {
-        TypedQuery<Product> query= sessionFactory.getCurrentSession().createQuery("delete Product where id = :id");
-        query.setParameter("id", id);
-        return query.getSingleResult();
+    public void deleteProductById(Integer id) {
+        Product product = sessionFactory.getCurrentSession().find(Product.class, id);
+        sessionFactory.getCurrentSession().delete(product);
     }
 }

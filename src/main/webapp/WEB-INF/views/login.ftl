@@ -19,7 +19,7 @@
     <fieldset>
         <legend>Войти в систему</legend>
         <form name="user" action="/login" method="post">
-            Логин : <input type="text" name="name" /><br/>
+            Email : <input type="text" name="email" /><br/>
             Пароль: <input type="text" name="password" /><br/>
             <input type="submit" value="Войти" />
         </form>

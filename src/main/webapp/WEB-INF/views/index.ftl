@@ -40,19 +40,19 @@
             <td>Действие</td>
         </tr>
         <#list productsList as product>
-        <tr>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.value}</td>
-            <td>
-                <a href="/products/edit/${product.id}">
-                    <button>Редактировать</button>
-                </a>
-                <a href="/products/delete/${product.id}">
-                    <button>Удалить</button>
-                </a>
-            </td>
+            <tr>
+                <td>${product.id}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>${product.value}</td>
+                <td>
+                    <a href="/products/edit/${product.id}">
+                        <button>Редактировать</button>
+                    </a>
+                    <a href="/products/delete/${product.id}">
+                        <button>Удалить</button>
+                    </a>
+                </td>
             </tr>
         </#list>
     </table>
