@@ -39,7 +39,7 @@
             <td>Количество</td>
             <td>Действие</td>
         </tr>
-        <#list productsList as product>
+        <#list productList as product>
         <tr>
             <td>${product.id}</td>
             <td>${product.name}</td>

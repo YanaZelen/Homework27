@@ -9,13 +9,18 @@ import ru.web.model.User;
 import javax.persistence.TypedQuery;
 
 @Repository
+@Transactional
 public class UserRepo {
     @Autowired
     SessionFactory sessionFactory;
 
-    @Transactional
     public void saveUser(User user) {
         sessionFactory.getCurrentSession().save(user);
     }
 
+    public User getUserByEmail(String email) {
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User where email = :email");
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
 }
